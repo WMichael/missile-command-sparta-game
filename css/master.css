@@ -1,0 +1,17 @@
+/* Header styling */
+h1 {
+  font-family: sans-serif;
+  font-size: 65px;
+}
+
+/* Body styling */
+body {
+  text-align: center;
+}
+
+.gameFrame {
+  border: 1px black solid;
+  margin: auto;
+  width: 850px;
+  height: 500px;
+}

@@ -15,3 +15,22 @@ body {
   width: 850px;
   height: 500px;
 }
+
+/* Extra styling for sprites*/
+.meteor-left, .meteor-right, .meteor-down {
+  width: 42px;
+  height: 42px;
+  position: relative;
+}
+
+.meteor-left {
+  background-image: url(../images/sprites/meteor-left.png);
+}
+
+.meteor-down {
+  background-image: url(../images/sprites/meteor-down.png);
+}
+
+.meteor-right {
+  background-image: url(../images/sprites/meteor-right.png);
+}

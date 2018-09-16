@@ -3,12 +3,11 @@ h1 {
   font-family: sans-serif;
   font-size: 65px;
 }
-
-/* Body styling */
-body {
+header {
   text-align: center;
 }
 
+/* Body styling */
 .gameFrame {
   border: 1px black solid;
   margin: auto;
@@ -17,20 +16,10 @@ body {
 }
 
 /* Extra styling for sprites*/
-.meteor-left, .meteor-right, .meteor-down {
+.meteor {
   width: 42px;
   height: 42px;
   position: relative;
-}
-
-.meteor-left {
-  background-image: url(../images/sprites/meteor-left.png);
-}
-
-.meteor-down {
-  background-image: url(../images/sprites/meteor-down.png);
-}
-
-.meteor-right {
-  background-image: url(../images/sprites/meteor-right.png);
+  display: inline-block;
+  background-image: url(../images/sprites/meteor.png);
 }

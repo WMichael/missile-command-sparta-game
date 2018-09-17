@@ -15,9 +15,9 @@ $(document).ready(function() {
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
   function Meteor(id) {
-    this.id = id; // Id attached to the Meteor element
+    this.id = id; // id attached to the Meteor element
     var meteorElement; // Had to use a var rather than this variable.
-    var destroyed = false;
+    var destroyed = false; // checks whether player has destroyed the meteor.
 
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
@@ -37,7 +37,7 @@ $(document).ready(function() {
         if (currentY >= (frameHeight - 42)) {
           window.clearInterval(interval);
           meteorElement.remove();
-          if(destroyed) {
+          if(!destroyed) {
             setScore(-50); // Deducts 50 points from the current score.
           }
         }
@@ -48,6 +48,7 @@ $(document).ready(function() {
     this.destroy = function() {
       meteorElement.remove();
       setScore(50);
+      destroyed = true;
     }
 
     // Methods that are called when this object is created.
@@ -64,6 +65,21 @@ $(document).ready(function() {
 
   function clearScore() {
     score.html("0");
+  }
+
+  function startGame() {
+    var i = 1;
+    var randomTime = Math.ceil(Math.random()*5000);
+
+    // At every interval of a random time a meteor will spawn
+    setInterval(function() {
+      randomTime = Math.ceil(Math.random()*5000);
+      if(i < 10){
+        meteor1 = new Meteor(i);
+        console.log(meteor1.id);
+        i++;
+      }
+    },randomTime);
   }
 
   // Initial setup
@@ -88,9 +104,7 @@ $(document).ready(function() {
     settingsDiv.css("display","none");
   });
 
-  // Testing the meteors
-  for (var i = 0; i < 5; i++) {
-    meteor = new Meteor(i);
-  }
+  // Test game
+  startGame();
 
 });

@@ -22,4 +22,5 @@ header {
   position: relative;
   display: inline-block;
   background-image: url(../images/sprites/meteor.png);
+  border: 1px solid black;
 }

@@ -1,24 +1,39 @@
 $(document).ready(function() {
-  // Fixed variables
+  // Views
   const homeDiv = $("#homeDiv");
   const gameDiv = $("#gameDiv");
   const settingsDiv = $("#settingsDiv");
+
+  // Game div elements
   const gameFrame = $(".gameFrame");
-  const gameFrameText = $("#gameFrameText");
+  const endRoundDiv = $("#endRound");
+  const endRoundText = $("#endRoundText");
+  const nextRoundBtn = $("#nextRoundBtn");
+  const playAgainBtn = $("#playAgainBtn");
   const score = $("#score");
-  const startButton = $("#startButton");
-  const settingsButton = $("#settingsButton");
   const returnHomeButtonFrmGame = $("#returnHomeButtonFrmGame");
+
+  // Settings div elements
   const returnHomeButtonFrmSettings = $("#returnHomeButtonFrmSettings");
-  const spawnY = 20; // Y position that an object will spawn at.
+
+  // Game frame
   const frameWidth = 850; // Width of the game frame.
   const frameHeight = 500;
+
+  // Menu elements
+  const startButton = $("#startButton");
+  const settingsButton = $("#settingsButton");
+
+  // Game variables
+  const spawnY = 20; // Y position that an object will spawn at.
   const roundArray = [5,10,20]; // Number of meteors per round.
+  var currentIndex = 0;
+  var meteorsPlaced = 0;
   var currentMeteors = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
   function Meteor(id) {
-    this.id = id; // id attached to the Meteor element
+    // this.id = id; // id attached to the Meteor element
     var meteorElement; // Had to use a var rather than this variable.
     var destroyed = false; // checks whether player has destroyed the meteor.
 
@@ -44,6 +59,11 @@ $(document).ready(function() {
           if(!destroyed) {
             setScore(-50); // Deducts 50 points from the current score.
             currentMeteors--;
+
+            // Checks whether this meteor is the last one of the round.
+            if ((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) {
+              endRound();
+            }
           }
         }
       },100);
@@ -55,9 +75,16 @@ $(document).ready(function() {
       setScore(50);
       destroyed = true;
       currentMeteors--;
+
+      // Checks whether this meteor is the last one of the round.
+      if ((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) {
+        endRound();
+      }
     }
 
     // Methods that are called when this object is created.
+    meteorsPlaced++;
+    console.log(meteorsPlaced + " / " + roundArray[currentIndex]);
     this.spawnMeteor();
     meteorElement.click(this.destroy); // Event listener for the object
     this.fall();
@@ -73,16 +100,15 @@ $(document).ready(function() {
     score.html("0");
   }
 
+  // Starts round of meteors taking in the amount of meteors to be spawned.
   function startRound(meteorAmt) {
     var randomTime = Math.ceil(Math.random()*6000)+1000;
     var i = 0;
     var interval = setInterval(function(){
 
       //  Loop through meteors
-      if(i <= meteorAmt) {
+      if(i < meteorAmt) {
         meteor = new Meteor(i);
-        console.log("Meteor " + i + " created.");
-        console.log(currentMeteors);
         i++;
       }
 
@@ -90,6 +116,22 @@ $(document).ready(function() {
       randomTime = Math.ceil(Math.random()*6000)+1000;
 
     },randomTime);
+  }
+
+  // Function called when all meteors have been placed and none are currently on the board.
+  // Called from the last meteor.
+  function endRound() {
+    console.log("Round ended!");
+    if (parseInt(score.text()) > 0) {
+      endRoundDiv.css("display","block");
+      endRoundText.html("Round Success!");
+      nextRoundBtn.css("display","block");
+    }
+    else {
+      endRoundDiv.css("display","block");
+      endRoundText.html("You lost!");
+      playAgainBtn.css("display","block");
+    }
   }
 
   function startGame() {

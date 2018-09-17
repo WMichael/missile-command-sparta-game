@@ -83,14 +83,26 @@ header {
   background-size: cover;
   padding: 0;
   overflow: auto;
+  overflow-y: hidden;
 }
 
-#gameFrameText {
+#endRound {
   position: relative;
   top: 150px;
   text-align: center;
   color: green;
   display: none;
+  padding: 0;
+}
+
+#endRound .action {
+  color: white;
+  font-size: 35px;
+  display: none;
+}
+
+#endRound .action:hover {
+  font-size: 45px;
 }
 
 /* Extra styling for sprites*/

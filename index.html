@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Missile Command</title>
+    <link rel="stylesheet" href="css/master.css">
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="js/app.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="homeDiv">
+      <h1>Missile Command</h1>
+      <div class="homeMenu">
+        <div id="startButton" class="button">
+          <p>Start</p>
+        </div>
+        <div id="startButton" class="button">
+          <p>Leaderboard</p>
+        </div>
+        <div id="settingsButton" class="button">
+          <p>Settings</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameDiv">
+      <header>
+        <h1>Missile Command</h1>
+      </header>
+      <section>
+        <div class="scoreBoard">
+          <h2>Score: <span id="score">0</span></h2>
+          <div id="returnHomeButtonFrmGame" class="button btnFloatRight">
+            <p>Home</p>
+          </div>
+        </div>
+        <div class="gameFrame">
+        </div>
+      </section>
+    </div>
+
+    <div id="settingsDiv">
+      <header>
+        <h1>Missile Command <br> Settings: </h1>
+      </header>
+      <section>
+        <div id="returnHomeButtonFrmSettings" class="button">
+          <p>Home</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

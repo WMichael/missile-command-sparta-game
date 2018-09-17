@@ -1,0 +1,93 @@
+* {
+  font-family: sans-serif;
+}
+
+/* Header styling */
+h1 {
+  font-size: 65px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+header {
+  text-align: center;
+}
+
+/* Views */
+
+/* Home div styling */
+#homeDiv {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 20%;
+  display: block; // set to none whilst in development.
+}
+
+.homeMenu {
+  width: 400px;
+  height: 50px;
+  margin: auto;
+}
+
+.button {
+  border: 3px solid black;
+  height: 50px;
+  width: 100px;
+  display: inline-block;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.button:hover {
+  border-color: green;
+  color: green;
+}
+
+.btnFloatRight {
+  float:right;
+}
+
+/* Settings Div styling */
+#settingsDiv {
+  display: none;
+}
+
+#settingsDiv section {
+  text-align: center;
+}
+
+/* Game Div styling */
+#gameDiv {
+  display: none; // set to block whilst in development.
+}
+
+.scoreBoard {
+  height: 50px;
+  width: 850px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.scoreBoard h2 {
+  font-size: 30px;
+  display: inline-block;
+}
+
+.gameFrame {
+  border: 1px black solid;
+  margin: auto;
+  width: 850px;
+  height: 500px;
+  cursor: crosshair;
+  background-image: url("../images/gameBackground.png");
+  background-size: cover;
+}
+
+/* Extra styling for sprites*/
+.meteor {
+  width: 42px;
+  height: 42px;
+  position: relative;
+  display: inline-block;
+  background-image: url(../images/sprites/meteor.png);
+}

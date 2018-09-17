@@ -1,7 +1,14 @@
 $(document).ready(function() {
   // Fixed variables
+  const homeDiv = $("#homeDiv");
+  const gameDiv = $("#gameDiv");
+  const settingsDiv = $("#settingsDiv");
   const gameFrame = $(".gameFrame");
   const score = $("#score");
+  const startButton = $("#startButton");
+  const settingsButton = $("#settingsButton");
+  const returnHomeButtonFrmGame = $("#returnHomeButtonFrmGame");
+  const returnHomeButtonFrmSettings = $("#returnHomeButtonFrmSettings");
   const spawnY = 20; // Y position that an object will spawn at.
   const frameWidth = 850; // Width of the game frame.
   const frameHeight = 500;
@@ -56,10 +63,31 @@ $(document).ready(function() {
     score.html("0");
   }
 
+  // Initial setup
+  startButton.click(function(){
+    homeDiv.css("display","none");
+    gameDiv.css("display","block");
+  });
+
+  settingsButton.click(function() {
+    settingsDiv.css("display","block");
+    homeDiv.css("display","none");
+    gameDiv.css("display","none");
+  })
+
+  returnHomeButtonFrmGame.click(function(){
+    homeDiv.css("display","block");
+    gameDiv.css("display","none");
+  });
+
+  returnHomeButtonFrmSettings.click(function(){
+    homeDiv.css("display","block");
+    settingsDiv.css("display","none");
+  });
+
   // Testing the meteors
   for (var i = 0; i < 5; i++) {
     meteor = new Meteor(i);
-    console.log(meteor);
   }
 
 });

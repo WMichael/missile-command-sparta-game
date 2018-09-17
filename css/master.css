@@ -13,16 +13,64 @@ header {
   text-align: center;
 }
 
-/* Body styling */
+/* Views */
+
+/* Home div styling */
+#homeDiv {
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 20%;
+  display: none; // set to none whilst in development.
+}
+
+.homeMenu {
+  width: 400px;
+  height: 50px;
+  margin: auto;
+}
+
+.button {
+  border: 3px solid black;
+  height: 50px;
+  width: 100px;
+  display: inline-block;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.button:hover {
+  border-color: green;
+  color: green;
+}
+
+.btnFloatRight {
+  float:right;
+}
+
+/* Settings Div styling */
+#settingsDiv {
+  display: none;
+}
+
+#settingsDiv section {
+  text-align: center;
+}
+
+/* Game Div styling */
+#gameDiv {
+  display: block; // set to block whilst in development.
+}
+
 .scoreBoard {
   height: 50px;
   width: 850px;
   margin: auto;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
 }
 
 .scoreBoard h2 {
   font-size: 30px;
+  display: inline-block;
 }
 
 .gameFrame {

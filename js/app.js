@@ -86,6 +86,7 @@ $(document).ready(function() {
   startButton.click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
+    startGame();
   });
 
   settingsButton.click(function() {
@@ -105,6 +106,6 @@ $(document).ready(function() {
   });
 
   // Test game
-  startGame();
+  // startGame();
 
 });

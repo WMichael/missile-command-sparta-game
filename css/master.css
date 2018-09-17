@@ -20,7 +20,7 @@ header {
   text-align: center;
   vertical-align: middle;
   margin-top: 20%;
-  display: none; // set to none whilst in development.
+  display: block; // set to none whilst in development.
 }
 
 .homeMenu {
@@ -58,7 +58,7 @@ header {
 
 /* Game Div styling */
 #gameDiv {
-  display: block; // set to block whilst in development.
+  display: none; // set to block whilst in development.
 }
 
 .scoreBoard {

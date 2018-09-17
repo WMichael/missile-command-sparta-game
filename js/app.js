@@ -4,6 +4,7 @@ $(document).ready(function() {
   const gameDiv = $("#gameDiv");
   const settingsDiv = $("#settingsDiv");
   const gameFrame = $(".gameFrame");
+  const gameFrameText = $("#gameFrameText");
   const score = $("#score");
   const startButton = $("#startButton");
   const settingsButton = $("#settingsButton");
@@ -12,6 +13,8 @@ $(document).ready(function() {
   const spawnY = 20; // Y position that an object will spawn at.
   const frameWidth = 850; // Width of the game frame.
   const frameHeight = 500;
+  const roundArray = [5,10,20]; // Number of meteors per round.
+  var currentMeteors = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
   function Meteor(id) {
@@ -24,6 +27,7 @@ $(document).ready(function() {
       var spawnX = Math.ceil(Math.random()*(frameWidth-180));
       gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "px;'> </div>");
       meteorElement = $("#" + id);
+      currentMeteors++;
     }
 
     // Function for dropping the meteor
@@ -36,9 +40,10 @@ $(document).ready(function() {
           currentY += speed;
         if (currentY >= (frameHeight - 42)) {
           window.clearInterval(interval);
-          meteorElement.remove();
+          meteorElement.css("visibility","hidden");
           if(!destroyed) {
             setScore(-50); // Deducts 50 points from the current score.
+            currentMeteors--;
           }
         }
       },100);
@@ -46,9 +51,10 @@ $(document).ready(function() {
 
     // Removes element on click
     this.destroy = function() {
-      meteorElement.remove();
+      meteorElement.css("visibility","hidden");
       setScore(50);
       destroyed = true;
+      currentMeteors--;
     }
 
     // Methods that are called when this object is created.
@@ -67,26 +73,34 @@ $(document).ready(function() {
     score.html("0");
   }
 
-  function startGame() {
-    var i = 1;
-    var randomTime = Math.ceil(Math.random()*5000);
+  function startRound(meteorAmt) {
+    var randomTime = Math.ceil(Math.random()*6000)+1000;
+    var i = 0;
+    var interval = setInterval(function(){
 
-    // At every interval of a random time a meteor will spawn
-    setInterval(function() {
-      randomTime = Math.ceil(Math.random()*5000);
-      if(i < 10){
-        meteor1 = new Meteor(i);
-        console.log(meteor1.id);
+      //  Loop through meteors
+      if(i <= meteorAmt) {
+        meteor = new Meteor(i);
+        console.log("Meteor " + i + " created.");
+        console.log(currentMeteors);
         i++;
       }
+
+      //Set Random interval
+      randomTime = Math.ceil(Math.random()*6000)+1000;
+
     },randomTime);
+  }
+
+  function startGame() {
+    startRound(roundArray[0]);
   }
 
   // Initial setup
   startButton.click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
-    startGame();
+    // startGame();
   });
 
   settingsButton.click(function() {
@@ -106,6 +120,6 @@ $(document).ready(function() {
   });
 
   // Test game
-  // startGame();
+  startGame();
 
 });

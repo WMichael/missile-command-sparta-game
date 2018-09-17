@@ -20,7 +20,7 @@ header {
   text-align: center;
   vertical-align: middle;
   margin-top: 20%;
-  display: block; // set to none whilst in development.
+  display: none; // set to none whilst in development.
 }
 
 .homeMenu {
@@ -58,7 +58,7 @@ header {
 
 /* Game Div styling */
 #gameDiv {
-  display: none; // set to block whilst in development.
+  display: block; // set to block whilst in development.
 }
 
 .scoreBoard {
@@ -81,6 +81,16 @@ header {
   cursor: crosshair;
   background-image: url("../images/gameBackground.png");
   background-size: cover;
+  padding: 0;
+  overflow: auto;
+}
+
+#gameFrameText {
+  position: relative;
+  top: 150px;
+  text-align: center;
+  color: green;
+  display: none;
 }
 
 /* Extra styling for sprites*/
@@ -90,4 +100,6 @@ header {
   position: relative;
   display: inline-block;
   background-image: url(../images/sprites/meteor.png);
+  margin: 0;
+  padding: 0;
 }

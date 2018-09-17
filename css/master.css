@@ -1,13 +1,30 @@
+* {
+  font-family: sans-serif;
+}
+
 /* Header styling */
 h1 {
-  font-family: sans-serif;
   font-size: 65px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
+
 header {
   text-align: center;
 }
 
 /* Body styling */
+.scoreBoard {
+  height: 50px;
+  width: 850px;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.scoreBoard h2 {
+  font-size: 30px;
+}
+
 .gameFrame {
   border: 1px black solid;
   margin: auto;

@@ -21,10 +21,12 @@ $(document).ready(function() {
     this.fall = function() {
       var speed = Math.ceil(Math.random()*5);
       var currentY = spawnY;
-      setInterval(function() {
-        if(currentY <= (frameHeight - 42)) {
+      var interval = setInterval(function() {
           meteorElement.css("top",currentY + "px");
           currentY += speed;
+        if (currentY >= (frameHeight - 42)) {
+          window.clearInterval(interval);
+          meteorElement.remove();
         }
       },100);
     }

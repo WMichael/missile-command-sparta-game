@@ -79,6 +79,8 @@ header {
   width: 850px;
   height: 500px;
   cursor: crosshair;
+  background-image: url("../images/gameBackground.png");
+  background-size: cover;
 }
 
 /* Extra styling for sprites*/

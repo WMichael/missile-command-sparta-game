@@ -17,6 +17,7 @@ $(document).ready(function() {
   function Meteor(id) {
     this.id = id; // Id attached to the Meteor element
     var meteorElement; // Had to use a var rather than this variable.
+    var destroyed = false;
 
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
@@ -36,7 +37,9 @@ $(document).ready(function() {
         if (currentY >= (frameHeight - 42)) {
           window.clearInterval(interval);
           meteorElement.remove();
-          setScore(-50); // Deducts 50 points from the current score.
+          if(destroyed) {
+            setScore(-50); // Deducts 50 points from the current score.
+          }
         }
       },100);
     }

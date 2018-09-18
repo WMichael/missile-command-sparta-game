@@ -51,7 +51,7 @@ $(document).ready(function() {
       var interval = setInterval(function() {
           meteorElement.css("top",currentY + "px");
           currentY += speed;
-        if (currentY >= (frameHeight - 70)) {
+        if (currentY >= (frameHeight - 100)) {
           window.clearInterval(interval);
           meteorElement.css("visibility","hidden");
           if(!destroyed && gameOver != true) {

@@ -18,11 +18,10 @@ $(document).ready(function() {
   const defence = $("#defenceLevel");
 
   // Game frame
-  // const frameWidth = 850; // Width of the game frame.
-  const frameHeight = 550;
+  const frameHeight = 500;
 
   // Game variables
-  const spawnY = 20; // Y position that an object will spawn at.
+  const spawnY = 0; // Y position that an object will spawn at.
   const roundArray = [5,15,25,35]; // Number of meteors per round.
   var currentIndex = 0; // Start of each round current index is incremented.
   var meteorsPlaced = 0; // Reset after each round.
@@ -181,6 +180,7 @@ $(document).ready(function() {
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
+    this.sound.volume = 0.1;
     document.body.appendChild(this.sound);
     this.play = function(){
         this.sound.play();

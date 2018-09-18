@@ -5,6 +5,7 @@
 body {
   margin: 0;
   background-color: lightgrey;
+  overflow: hidden;
 }
 
 /* Header styling */
@@ -84,7 +85,7 @@ header {
   border: 1px black solid;
   margin: auto;
   width: 100%;
-  height: 550px;
+  height: 500px;
   cursor: crosshair;
   background-image: url("../images/gameBackground.png");
   background-size: cover;
@@ -98,7 +99,11 @@ header {
   margin: auto;
   position: relative;
   overflow-y: hidden;
-  top: 471px;
+  top: 421px;
+}
+
+.base img {
+  margin: auto;
 }
 
 #endLevel {

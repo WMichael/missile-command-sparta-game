@@ -11,22 +11,14 @@ $(document).ready(function() {
   const nextRoundBtn = $("#nextRoundBtn");
   const playAgainBtn = $("#playAgainBtn");
   const score = $("#score");
-  const returnHomeButtonFrmGame = $("#returnHomeButtonFrmGame");
-
-  // Settings div elements
-  const returnHomeButtonFrmSettings = $("#returnHomeButtonFrmSettings");
 
   // Game frame
   const frameWidth = 850; // Width of the game frame.
   const frameHeight = 500;
 
-  // Menu elements
-  const startButton = $("#startButton");
-  const settingsButton = $("#settingsButton");
-
   // Game variables
   const spawnY = 20; // Y position that an object will spawn at.
-  const roundArray = [5,10,20]; // Number of meteors per round.
+  const roundArray = [20,30,40]; // Number of meteors per round.
   var currentIndex = 0;
   var meteorsPlaced = 0;
   var currentMeteors = 0;
@@ -39,7 +31,7 @@ $(document).ready(function() {
 
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
-      var spawnX = Math.ceil(Math.random()*(frameWidth-180));
+      var spawnX = Math.ceil(Math.random()*(frameWidth-250));
       gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "px;'> </div>");
       meteorElement = $("#" + id);
       currentMeteors++;
@@ -47,7 +39,7 @@ $(document).ready(function() {
 
     // Function for dropping the meteor
     this.fall = function() {
-      var speed = Math.ceil(Math.random()*5);
+      var speed = Math.ceil(Math.random()*15);
       var currentY = spawnY;
       // Every 100ms the object moves downwards until it reaches the bottom, at the bottom the interval is cleared and a score is taken away.
       var interval = setInterval(function() {
@@ -102,7 +94,7 @@ $(document).ready(function() {
 
   // Starts round of meteors taking in the amount of meteors to be spawned.
   function startRound(meteorAmt) {
-    var randomTime = Math.ceil(Math.random()*6000)+1000;
+    var randomTime = Math.ceil(Math.random()*2000)+1000;
     var i = 0;
     var interval = setInterval(function(){
 
@@ -113,7 +105,7 @@ $(document).ready(function() {
       }
 
       //Set Random interval
-      randomTime = Math.ceil(Math.random()*6000)+1000;
+      randomTime = Math.ceil(Math.random()*2000)+1000;
 
     },randomTime);
   }
@@ -139,24 +131,24 @@ $(document).ready(function() {
   }
 
   // Initial setup
-  startButton.click(function(){
+  $("#startButton").click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
     // startGame();
   });
 
-  settingsButton.click(function() {
+  $("#settingsButton").click(function() {
     settingsDiv.css("display","block");
     homeDiv.css("display","none");
     gameDiv.css("display","none");
   })
 
-  returnHomeButtonFrmGame.click(function(){
+  $("#returnHomeButtonFrmGame").click(function(){
     homeDiv.css("display","block");
     gameDiv.css("display","none");
   });
 
-  returnHomeButtonFrmSettings.click(function(){
+  $("#returnHomeButtonFrmSettings").click(function(){
     homeDiv.css("display","block");
     settingsDiv.css("display","none");
   });

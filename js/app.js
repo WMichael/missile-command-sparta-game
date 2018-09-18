@@ -4,6 +4,10 @@ $(document).ready(function() {
   const gameDiv = $("#gameDiv");
   const settingsDiv = $("#settingsDiv");
 
+  // Sounds
+  const winSound = new sound("sounds/win.wav");
+  const loseSound = new sound("sounds/lose.mp3");
+
   // Game div elements
   const gameFrame = $(".gameFrame");
   const endRoundDiv = $("#endRound");
@@ -47,13 +51,14 @@ $(document).ready(function() {
       var interval = setInterval(function() {
           meteorElement.css("top",currentY + "px");
           currentY += speed;
-        if (currentY >= (frameHeight - 42)) {
+        if (currentY >= (frameHeight - 60)) {
           window.clearInterval(interval);
           meteorElement.css("visibility","hidden");
           if(!destroyed) {
             setScore(-50); // Deducts 50 points from the current score.
             decreaseDefence(); // Decreases Defence
             currentMeteors--;
+
             // Checks whether this meteor is the last one of the round.
             if (((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) || parseInt(defence.text()) <= 0) {
               endRound();
@@ -67,6 +72,8 @@ $(document).ready(function() {
     this.destroy = function() {
       meteorElement.css("visibility","hidden");
       setScore(50);
+      var meteorExplosion = new sound("sounds/explosion.mp3");
+      meteorExplosion.play();
       destroyed = true;
       currentMeteors--;
 
@@ -129,11 +136,13 @@ $(document).ready(function() {
       endRoundDiv.css("display","block");
       endRoundText.html("<h1>Round Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
       nextRoundBtn.css("display","block");
+      winSound.play();
     }
     else {
       endRoundDiv.css("display","block");
       endRoundText.html("<h1>You lost!</h1>");
       playAgainBtn.css("display","block");
+      loseSound.play();
     }
     gameOver = true; // clears Interval in the start round function.
     $(".meteor").remove();

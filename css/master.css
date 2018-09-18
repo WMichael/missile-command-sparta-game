@@ -89,13 +89,24 @@ header {
   /* overflow-y: hidden; */
 }
 
+.base {
+  width: 200px;
+  height: 40px;
+  margin: auto;
+  border: red dashed 2px;
+  position: relative;
+  z-index:initial;
+  top: 457px;
+}
+
 #endRound {
   position: relative;
-  top: 150px;
+  top: 120px;
   text-align: center;
   color: green;
   display: none;
   padding: 0;
+  z-index: 1;
 }
 
 #endRound .action {

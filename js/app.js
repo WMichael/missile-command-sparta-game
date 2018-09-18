@@ -127,12 +127,12 @@ $(document).ready(function() {
     console.log("Round ended!");
     if (parseInt(score.text()) > 0 && parseInt(defence.text()) > 0) {
       endRoundDiv.css("display","block");
-      endRoundText.html("Round Success!");
+      endRoundText.html("<h1>Round Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
       nextRoundBtn.css("display","block");
     }
     else {
       endRoundDiv.css("display","block");
-      endRoundText.html("You lost!");
+      endRoundText.html("<h1>You lost!</h1>");
       playAgainBtn.css("display","block");
     }
     gameOver = true; // clears Interval in the start round function.
@@ -148,6 +148,21 @@ $(document).ready(function() {
   function startGame() {
     startRound(roundArray[0]);
   }
+
+  function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}
 
   // Initial setup
   $("#startButton").click(function(){

@@ -98,7 +98,7 @@ header {
   top: 457px;
 }
 
-#endRound {
+#endLevel {
   position: relative;
   top: 120px;
   text-align: center;
@@ -107,13 +107,13 @@ header {
   padding: 0;
 }
 
-#endRound .action {
+#endLevel .action {
   color: white;
   font-size: 35px;
   display: none;
 }
 
-#endRound .action:hover {
+#endLevel .action:hover {
   font-size: 45px;
 }
 

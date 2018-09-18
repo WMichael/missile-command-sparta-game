@@ -10,9 +10,9 @@ $(document).ready(function() {
 
   // Game div elements
   const gameFrame = $(".gameFrame");
-  const endRoundDiv = $("#endRound");
-  const endRoundText = $("#endRoundText");
-  const nextRoundBtn = $("#nextRoundBtn");
+  const endLevelDiv = $("#endLevel");
+  const endLevelText = $("#endLevelText");
+  const nextLevelBtn = $("#nextLevelBtn");
   const playAgainBtn = $("#playAgainBtn");
   const score = $("#score");
   const defence = $("#defenceLevel");
@@ -54,14 +54,15 @@ $(document).ready(function() {
         if (currentY >= (frameHeight - 60)) {
           window.clearInterval(interval);
           meteorElement.css("visibility","hidden");
-          if(!destroyed) {
+          if(!destroyed && gameOver != true) {
             setScore(-50); // Deducts 50 points from the current score.
             decreaseDefence(); // Decreases Defence
             currentMeteors--;
 
             // Checks whether this meteor is the last one of the round.
             if (((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) || parseInt(defence.text()) <= 0) {
-              endRound();
+              gameOver = true; // clears Interval in the start round function.
+              endLevel();
             }
           }
         }
@@ -79,7 +80,8 @@ $(document).ready(function() {
 
       // Checks whether this meteor is the last one of the round.
       if ((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) {
-        endRound();
+        gameOver = true; // clears Interval in the start round function.
+        endLevel();
       }
     }
 
@@ -106,12 +108,14 @@ $(document).ready(function() {
   }
 
   // Starts round of meteors taking in the amount of meteors to be spawned.
-  function startRound(meteorAmt) {
+  function startLevel(meteorAmt) {
     var randomTime = Math.ceil(Math.random()*2000)+1000;
     var i = 0;
     var interval = setInterval(function(){
       // If game is over then no more meteors spawn.
       if (gameOver == true) {
+        console.log("Interval clear");
+        $(".meteor").remove();
         window.clearInterval(interval);
       }
       else {
@@ -130,32 +134,34 @@ $(document).ready(function() {
 
   // Function called when all meteors have been placed and none are currently on the board.
   // Called from the last meteor.
-  function endRound() {
-    console.log("Round ended!");
+  function endLevel() {
+    console.log("End level function called");
+    $(".base").css("display","none");
+
+    score.html("0");
+    defence.html("100");
     if (parseInt(score.text()) > 0 && parseInt(defence.text()) > 0) {
-      endRoundDiv.css("display","block");
-      endRoundText.html("<h1>Round Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
-      nextRoundBtn.css("display","block");
+      endLevelDiv.css("display","block");
+      endLevelText.html("<h1>Level Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
+      nextLevelBtn.css("display","block");
       winSound.play();
     }
     else {
-      endRoundDiv.css("display","block");
-      endRoundText.html("<h1>You lost!</h1>");
+      endLevelDiv.css("display","block");
+      endLevelText.html("<h1>You lost!</h1>");
       playAgainBtn.css("display","block");
       loseSound.play();
     }
-    gameOver = true; // clears Interval in the start round function.
-    $(".meteor").remove();
 
     // Reset variables
-    gameOver = false;
+    gameOver = true;
     meteorsPlaced = 0;
     currentMeteors = 0;
-    currentIndex++;
+    // currentIndex++;
   }
 
   function startGame() {
-    startRound(roundArray[0]);
+    startLevel(roundArray[0]);
   }
 
   function sound(src) {

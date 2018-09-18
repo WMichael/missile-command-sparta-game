@@ -45,7 +45,7 @@ $(document).ready(function() {
 
     // Function for dropping the meteor
     this.fall = function() {
-      var speed = Math.ceil(Math.random()*15);
+      var speed = Math.ceil(Math.random()*25)+5;
       var currentY = spawnY;
       // Every 100ms the object moves downwards until it reaches the bottom, at the bottom the interval is cleared and a score is taken away.
       var interval = setInterval(function() {

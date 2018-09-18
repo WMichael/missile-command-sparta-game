@@ -71,6 +71,9 @@ header {
 .scoreBoard h2 {
   font-size: 30px;
   display: inline-block;
+  width: 230px;
+  border: 3px solid purple;
+  padding: 3px;
 }
 
 .gameFrame {
@@ -82,8 +85,8 @@ header {
   background-image: url("../images/gameBackground.png");
   background-size: cover;
   padding: 0;
-  overflow: auto;
-  overflow-y: hidden;
+  /* overflow: auto; */
+  /* overflow-y: hidden; */
 }
 
 #endRound {

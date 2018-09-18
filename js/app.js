@@ -18,8 +18,8 @@ $(document).ready(function() {
   const defence = $("#defenceLevel");
 
   // Game frame
-  const frameWidth = 850; // Width of the game frame.
-  const frameHeight = 500;
+  // const frameWidth = 850; // Width of the game frame.
+  const frameHeight = 550;
 
   // Game variables
   const spawnY = 20; // Y position that an object will spawn at.
@@ -37,8 +37,8 @@ $(document).ready(function() {
 
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
-      var spawnX = Math.ceil(Math.random()*(300));
-      gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "px;'> </div>");
+      var spawnX = Math.floor(Math.random()*(40))+20; // SpawnX at a random percentage of the width.
+      gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "%;'> </div>");
       meteorElement = $("#" + id);
       currentMeteors++;
     }
@@ -51,7 +51,7 @@ $(document).ready(function() {
       var interval = setInterval(function() {
           meteorElement.css("top",currentY + "px");
           currentY += speed;
-        if (currentY >= (frameHeight - 60)) {
+        if (currentY >= (frameHeight - 70)) {
           window.clearInterval(interval);
           meteorElement.css("visibility","hidden");
           if(!destroyed && gameOver != true) {

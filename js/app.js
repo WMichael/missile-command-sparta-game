@@ -23,7 +23,7 @@ $(document).ready(function() {
 
   // Game variables
   const spawnY = 20; // Y position that an object will spawn at.
-  const roundArray = [5,5,5,5]; // Number of meteors per round.
+  const roundArray = [5,15,25,35]; // Number of meteors per round.
   var currentIndex = 0; // Start of each round current index is incremented.
   var meteorsPlaced = 0; // Reset after each round.
   var currentMeteors = 0;

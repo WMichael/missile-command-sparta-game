@@ -262,6 +262,7 @@ $(document).ready(function() {
     homeDiv.css("display","block");
     settingsDiv.css("display","none");
     leaderboardDiv.css("display","none");
+    endLevelDiv.css("display","none");
   });
 
   $("#checkSoundEffects").click(function() {

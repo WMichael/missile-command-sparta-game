@@ -15,8 +15,27 @@ h1 {
   margin-bottom: 15px;
 }
 
+h2 {
+  font-size: 40px;
+}
+
 header {
+  margin-top: 50px;
   text-align: center;
+}
+
+section {
+  text-align: center;
+}
+
+table {
+  margin: auto;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+td {
+  padding-left: 15px;
 }
 
 /* Views */
@@ -26,7 +45,7 @@ header {
   text-align: center;
   vertical-align: middle;
   margin-top: 20%;
-  display: none; // set to none whilst in development.
+  display: block; // set to none whilst in development.
 }
 
 .homeMenu {
@@ -58,13 +77,18 @@ header {
   display: none;
 }
 
-#settingsDiv section {
-  text-align: center;
+/* Leaderboard Div styling*/
+#leaderboardDiv {
+  display: none;
+}
+
+#leaderboardDiv td {
+  font-size: 28px;
 }
 
 /* Game Div styling */
 #gameDiv {
-  display: block; // set to block whilst in development.
+  display: none; // set to block whilst in development.
 }
 
 .scoreBoard {
@@ -107,7 +131,16 @@ header {
   margin: auto;
 }
 
-#endLevel {
+#endLevel{
+  position: relative;
+  top: 120px;
+  text-align: center;
+  color: green;
+  display: none;
+  padding: 0;
+}
+
+#endGame{
   position: relative;
   top: 120px;
   text-align: center;

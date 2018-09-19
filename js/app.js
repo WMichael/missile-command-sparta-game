@@ -3,8 +3,11 @@ $(document).ready(function() {
   const homeDiv = $("#homeDiv");
   const gameDiv = $("#gameDiv");
   const settingsDiv = $("#settingsDiv");
+  const leaderboardDiv = $("#leaderboardDiv");
 
   // Sounds
+  var soundEffects = true;
+  var backgroundMusic = true;
   const winSound = new sound("sounds/win.wav");
   const loseSound = new sound("sounds/lose.mp3");
 
@@ -12,6 +15,7 @@ $(document).ready(function() {
   const gameFrame = $(".gameFrame");
   const endLevelDiv = $("#endLevel");
   const endLevelText = $("#endLevelText");
+  const endGameDiv = $("#endGame");
   const nextLevelBtn = $("#nextLevelBtn");
   const playAgainBtn = $("#playAgainBtn");
   const score = $("#score");
@@ -29,6 +33,10 @@ $(document).ready(function() {
   var currentMeteors = 0;
   var decreaseDefenceAmt = 10; // Amt to decrease defence by.
   var gameOver = false;
+
+  // Leaderboard and current player score.
+  var leaderboard = [];
+  var playerScore = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
   function Meteor(id) {
@@ -60,7 +68,7 @@ $(document).ready(function() {
             currentMeteors--;
 
             // Checks whether this meteor is the last one of the round.
-            if (((meteorsPlaced == roundArray[currentIndex][0]) && currentMeteors == 0) || parseInt(defence.text()) <= 0) {
+            if (((meteorsPlaced == roundArray[currentIndex][0]) && currentMeteors == 0) || parseInt(defence.text()) <= 1) {
               gameOver = true; // clears Interval in the start round function.
               endLevel();
             }
@@ -73,8 +81,10 @@ $(document).ready(function() {
     this.destroy = function() {
       meteorElement.css("visibility","hidden");
       setScore(50);
-      var meteorExplosion = new sound("sounds/explosion.mp3");
-      meteorExplosion.play();
+      if (soundEffects) {
+        var meteorExplosion = new sound("sounds/explosion.mp3");
+        meteorExplosion.play();
+      }
       destroyed = true;
       currentMeteors--;
 
@@ -101,6 +111,8 @@ $(document).ready(function() {
 
   function decreaseDefence() {
     defence.html(parseInt(defence.text()) - decreaseDefenceAmt);
+    // Change opacity of base imgs depending on Defence percentage.
+    $(".base img").css("opacity","0."+defence.text());
   }
 
   function clearScore() {
@@ -109,7 +121,8 @@ $(document).ready(function() {
 
   // Starts round of meteors taking in the amount of meteors to be spawned.
   function startLevel() {
-    console.clear();
+    //console.clear();
+    console.log(playerScore);
     console.log("Level " + currentIndex);
     console.log("Amount of meteors: " + roundArray[currentIndex][0]);
     console.log("Min speed of meteor: " + roundArray[currentIndex][1]);
@@ -123,6 +136,7 @@ $(document).ready(function() {
       // If game is over then no more meteors spawn.
       if (gameOver == true) {
         $(".meteor").remove();
+        console.log("Interval to be removed");
         window.clearInterval(interval);
       }
       else {
@@ -142,23 +156,28 @@ $(document).ready(function() {
   // Function called when all meteors have been placed and none are currently on the board.
   // Called from the last meteor.
   function endLevel() {
+
+    // Reset opacity and hide the base.
+    $(".base img").css("opacity","1");
     $(".base").hide();
 
     // Whether player has won or lost
-    if (parseInt(score.text()) > 0 && parseInt(defence.text()) > 0) {
+    if (parseInt(score.text()) > 0 && parseInt(defence.text()) > 1) {
       // Whether its the end of the game
       if(currentIndex != (roundArray.length - 1)) {
         endLevelDiv.show();
-        endLevelText.html("<h1>Level " + currentIndex + " Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
+        endLevelText.html("<h1>Level " + currentIndex + " Success!</h1><br><h2>Points + Defence Bonus: " + (parseInt(score.text()) + parseInt(defence.text())) + "</h2>");
         nextLevelBtn.show();
-        playAgainBtn.show();
-        winSound.play();
+        if (soundEffects) {
+          winSound.play();
+        }
       }
       else {
-        endLevelDiv.show();
-        endLevelText.html("<h1>Game Finished!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
-        playAgainBtn.show();
-        nextLevelBtn.hide();
+        playerScore = playerScore + (parseInt(score.html()) + parseInt(defence.html()));
+        endGameDiv.show();
+        var playerName = prompt("Game Over - What's your name?");
+        $("#finalScore").html(playerName + " " + playerScore);
+        leaderboard.push([playerName,playerScore]); // Push name and score to leaderboard.
       }
     }
     else {
@@ -166,20 +185,20 @@ $(document).ready(function() {
       endLevelText.html("<h1>You lost!</h1>");
       nextLevelBtn.hide();
       playAgainBtn.show();
-      loseSound.play();
+      if (soundEffects) {
+        loseSound.play();
+      }
     }
-    score.html("0");
-    defence.html("100");
 
     // Reset variables
-    // gameOver = true;
+    gameOver = true;
     meteorsPlaced = 0;
     currentMeteors = 0;
   }
 
   function startGame() {
     gameOver = false;
-    startLevel(roundArray[0][currentIndex]);
+    startLevel();
     $(".base").show();
   }
 
@@ -199,11 +218,22 @@ $(document).ready(function() {
     }
 }
 
-  // Initial setup
   $("#startButton").click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
-    // startGame();
+    endLevelDiv.css("display","none");
+    startGame();
+  });
+
+  $("#leaderboardButton").click(function() {
+    // Clears table and then adds each score to the table.
+    $("#leaderboardTable").html("");
+    for (var i = 0; i < leaderboard.length; i++) {
+      $("#leaderboardTable").append("<tr><td>" + leaderboard[i][0] + "</td><td>" + leaderboard[i][1] + "</td></tr>");
+    }
+    homeDiv.css("display","none")
+    leaderboardDiv.css("display","block");
+
   });
 
   $("#settingsButton").click(function() {
@@ -213,17 +243,52 @@ $(document).ready(function() {
   })
 
   $("#returnHomeButtonFrmGame").click(function(){
+
+    // Finish current game
+    gameOver = true;
+    currentIndex = 0;
+    meteorsPlaced = 0;
+    currentMeteors = 0;
+    score.html("0");
+    defence.html("100");
+    $("#cLevel").html(currentIndex);
+    $(".base img").css("opacity","1");
+
     homeDiv.css("display","block");
     gameDiv.css("display","none");
   });
 
-  $("#returnHomeButtonFrmSettings").click(function(){
+  $(".returnHomeButton").click(function(){
     homeDiv.css("display","block");
     settingsDiv.css("display","none");
+    leaderboardDiv.css("display","none");
+    endLevelDiv.css("display","none");
   });
+
+  $("#checkSoundEffects").click(function() {
+    if ($("#checkSoundEffects:checked").length > 0) {
+      soundEffects = true;
+    }
+    else {
+      soundEffects = false;
+    }
+  })
+
+  $("#checkBackgroundMusic").click(function() {
+    if ($("#checkBackgroundMusic:checked").length > 0) {
+      backgroundMusic = true;
+    }
+    else {
+      backgroundMusic = false;
+    }
+  })
 
   // End level event listeners
   nextLevelBtn.click(function(){
+    playerScore = playerScore + (parseInt(score.html()) + parseInt(defence.html()));
+    console.log(playerScore);
+    score.html("0");
+    defence.html("100");
     currentIndex++;
     $("#cLevel").html(currentIndex);
     endLevelDiv.hide();
@@ -231,11 +296,9 @@ $(document).ready(function() {
   });
 
   playAgainBtn.click(function(){
+    score.html("0");
+    defence.html("100");
     endLevelDiv.hide();
     startGame();
   })
-
-  // Test game
-  startGame();
-
 });

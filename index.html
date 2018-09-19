@@ -17,12 +17,13 @@
         <div id="startButton" class="button">
           <p>Start</p>
         </div>
-        <div id="startButton" class="button">
+        <div id="leaderboardButton" class="button">
           <p>Leaderboard</p>
         </div>
         <div id="settingsButton" class="button">
           <p>Settings</p>
         </div>
+        <p><b><u>Instructions:</u></b> <br> <br>The aim of the game is to destroy the incoming meteors before they reach the base. Destroying a meteor will earn you 50 points but missing a meteor will lose you 50 points and 10% from your defence. <br> <br>In order to win a level you must have 1 point or more and have a defence level of over 1%, getting a defence level of under 1% will instantly lose you the level.</p>
       </div>
     </div>
 
@@ -44,6 +45,10 @@
             <div id="endLevelText">Placeholder Text</div>
             <div id="nextLevelBtn" class="action">Next Level</div>
             <div id="playAgainBtn" class="action">Play Again</div>
+          </div>
+          <div id="endGame">
+            <h1>Game finished!</h1>
+            <h2 id="finalScore"></h2>
           </div>
           <div class="base">
             <img src="images/sprites/base1.png" alt="">
@@ -68,12 +73,36 @@
       </section>
     </div>
 
-    <div id="settingsDiv">
+    <div id="leaderboardDiv">
       <header>
-        <h1>Missile Command <br> Settings: </h1>
+        <h1>Leaderboard</h1>
       </header>
       <section>
-        <div id="returnHomeButtonFrmSettings" class="button">
+        <table id="leaderboardTable">
+
+        </table>
+        <div class="returnHomeButton button">
+          <p>Home</p>
+        </div>
+      </section>
+    </div>
+
+    <div id="settingsDiv">
+      <header>
+        <h1>Settings</h1>
+      </header>
+      <section>
+        <table>
+          <tr>
+            <td><h3>Sound Effects</h3></td>
+            <td><input type="checkbox" id="checkSoundEffects" checked></td>
+          </tr>
+          <tr>
+            <td><h3>Background Music</h3></td>
+            <td><input type="checkbox" id="checkBackgroundMusic" checked></td>
+          </tr>
+        </table>
+        <div class="returnHomeButton button">
           <p>Home</p>
         </div>
       </section>

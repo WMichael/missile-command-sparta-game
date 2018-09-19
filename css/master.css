@@ -79,6 +79,7 @@ header {
   display: inline-block;
   width: 220px;
   padding: 3px;
+  text-align: center;
 }
 
 .gameFrame {

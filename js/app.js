@@ -223,6 +223,7 @@ $(document).ready(function() {
     homeDiv.css("display","none");
     gameDiv.css("display","block");
     endLevelDiv.css("display","none");
+    endGameDiv.css("display","none");
     spawnY = gameFrame.offset().top; // declared again since start button shows the game div.
     startGame();
   });

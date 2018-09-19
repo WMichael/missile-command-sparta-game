@@ -178,9 +178,6 @@ $(document).ready(function() {
         var playerName = prompt("Game Over - What's your name?");
         $("#finalScore").html(playerName + " " + playerScore);
         leaderboard.push([playerName,playerScore]); // Push name and score to leaderboard.
-
-        // After newest score has been added, set cookie for the leaderboard array.
-        Cookies.set("leaderboard",JSON.stringify(leaderboard),{ expires: 365});
       }
     }
     else {
@@ -229,12 +226,6 @@ $(document).ready(function() {
   });
 
   $("#leaderboardButton").click(function() {
-    // Get leaderboard cookie
-    if (Cookies.get("leaderboard") == true) {
-      leaderboard = JSON.parse(Cookies.get("leaderboard"));
-    }
-    console.log(leaderboard);
-
     // Clears table and then adds each score to the table.
     $("#leaderboardTable").html("");
     for (var i = 0; i < leaderboard.length; i++) {

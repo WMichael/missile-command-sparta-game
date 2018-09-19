@@ -2,6 +2,12 @@
   font-family: sans-serif;
 }
 
+body {
+  margin: 0;
+  background-color: lightgrey;
+  overflow: hidden;
+}
+
 /* Header styling */
 h1 {
   font-size: 65px;
@@ -71,31 +77,34 @@ header {
 .scoreBoard h2 {
   font-size: 30px;
   display: inline-block;
-  width: 230px;
-  border: 3px solid purple;
+  width: 220px;
   padding: 3px;
+  text-align: center;
 }
 
 .gameFrame {
   border: 1px black solid;
   margin: auto;
-  width: 850px;
+  width: 100%;
   height: 500px;
   cursor: crosshair;
   background-image: url("../images/gameBackground.png");
   background-size: cover;
   padding: 0;
   /* overflow: auto; */
-  /* overflow-y: hidden; */
 }
 
 .base {
-  width: 200px;
-  height: 40px;
+  width: 100%;
+  height: 80px;
   margin: auto;
-  border: red dashed 2px;
   position: relative;
-  top: 457px;
+  overflow-y: hidden;
+  top: 421px;
+}
+
+.base img {
+  margin: auto;
 }
 
 #endLevel {

@@ -163,7 +163,7 @@ td {
 .meteor {
   width: 42px;
   height: 42px;
-  position: relative;
+  position: absolute;
   display: inline-block;
   background-image: url(../images/sprites/meteor.png);
   margin: 0;

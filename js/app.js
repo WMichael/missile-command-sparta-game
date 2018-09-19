@@ -25,7 +25,8 @@ $(document).ready(function() {
   const frameHeight = 500;
 
   // Game variables
-  const spawnY = 0; // Y position that an object will spawn at.
+  // const spawnY = 0; // Y position that an object will spawn at.
+  var spawnY = gameFrame.offset().top; // finds the top of the gameframe
   const roundArray = [[5,5,10,1500,2000],[10,5,15,1500,1500],[13,10,15,1500,1500],[15,10,20,1500,1500]];
   // roundArray - 0: Amt of Meteors 1: Min Speed 2: Max Speed 3: Min Time 4: Max Time
   var currentIndex = 0; // Start of each round current index is incremented.
@@ -46,6 +47,7 @@ $(document).ready(function() {
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
       var spawnX = Math.floor(Math.random()*(30))+30; // SpawnX at a random percentage of the width.
+      console.log(spawnX + "%");
       gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "%;'> </div>");
       meteorElement = $("#" + id);
       currentMeteors++;
@@ -59,7 +61,7 @@ $(document).ready(function() {
       var interval = setInterval(function() {
           meteorElement.css("top",currentY + "px");
           currentY += speed;
-        if (currentY >= (frameHeight - 100)) {
+        if (currentY >= (spawnY + frameHeight - 75)) {
           window.clearInterval(interval);
           meteorElement.css("visibility","hidden");
           if(!destroyed && gameOver != true) {
@@ -121,8 +123,8 @@ $(document).ready(function() {
 
   // Starts round of meteors taking in the amount of meteors to be spawned.
   function startLevel() {
-    //console.clear();
-    console.log(playerScore);
+    console.clear();
+    console.log("Total Score: " + playerScore);
     console.log("Level " + currentIndex);
     console.log("Amount of meteors: " + roundArray[currentIndex][0]);
     console.log("Min speed of meteor: " + roundArray[currentIndex][1]);
@@ -136,7 +138,6 @@ $(document).ready(function() {
       // If game is over then no more meteors spawn.
       if (gameOver == true) {
         $(".meteor").remove();
-        console.log("Interval to be removed");
         window.clearInterval(interval);
       }
       else {
@@ -222,6 +223,7 @@ $(document).ready(function() {
     homeDiv.css("display","none");
     gameDiv.css("display","block");
     endLevelDiv.css("display","none");
+    spawnY = gameFrame.offset().top; // declared again since start button shows the game div.
     startGame();
   });
 
@@ -301,4 +303,7 @@ $(document).ready(function() {
     endLevelDiv.hide();
     startGame();
   })
+
+
+
 });

@@ -101,6 +101,8 @@ $(document).ready(function() {
 
   function decreaseDefence() {
     defence.html(parseInt(defence.text()) - decreaseDefenceAmt);
+    // Change opacity of base imgs depending on Defence percentage.
+    $(".base img").css("opacity","0."+defence.text());
   }
 
   function clearScore() {
@@ -142,6 +144,9 @@ $(document).ready(function() {
   // Function called when all meteors have been placed and none are currently on the board.
   // Called from the last meteor.
   function endLevel() {
+
+    // Reset opacity and hide the base.
+    $(".base img").css("opacity","1");
     $(".base").hide();
 
     // Whether player has won or lost

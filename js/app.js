@@ -35,7 +35,7 @@ $(document).ready(function() {
   var gameOver = false;
 
   // Leaderboard and current player score.
-  var leaderboard = []
+  var leaderboard = [];
   var playerScore = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
@@ -178,7 +178,9 @@ $(document).ready(function() {
         var playerName = prompt("Game Over - What's your name?");
         $("#finalScore").html(playerName + " " + playerScore);
         leaderboard.push([playerName,playerScore]); // Push name and score to leaderboard.
-        console.log(leaderboard);
+
+        // After newest score has been added, set cookie for the leaderboard array.
+        Cookies.set("leaderboard",JSON.stringify(leaderboard),{ expires: 365});
       }
     }
     else {
@@ -219,7 +221,6 @@ $(document).ready(function() {
     }
 }
 
-  // Initial setup
   $("#startButton").click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
@@ -228,9 +229,21 @@ $(document).ready(function() {
   });
 
   $("#leaderboardButton").click(function() {
-    homeDiv.css("display","none");
+    // Get leaderboard cookie
+    if (Cookies.get("leaderboard") == true) {
+      leaderboard = JSON.parse(Cookies.get("leaderboard"));
+    }
+    console.log(leaderboard);
+
+    // Clears table and then adds each score to the table.
+    $("#leaderboardTable").html("");
+    for (var i = 0; i < leaderboard.length; i++) {
+      $("#leaderboardTable").append("<tr><td>" + leaderboard[i][0] + "</td><td>" + leaderboard[i][1] + "</td></tr>");
+    }
+    homeDiv.css("display","none")
     leaderboardDiv.css("display","block");
-  })
+
+  });
 
   $("#settingsButton").click(function() {
     settingsDiv.css("display","block");

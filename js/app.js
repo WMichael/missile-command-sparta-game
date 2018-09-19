@@ -62,7 +62,7 @@ $(document).ready(function() {
             currentMeteors--;
 
             // Checks whether this meteor is the last one of the round.
-            if (((meteorsPlaced == roundArray[currentIndex][0]) && currentMeteors == 0) || parseInt(defence.text()) <= 0) {
+            if (((meteorsPlaced == roundArray[currentIndex][0]) && currentMeteors == 0) || parseInt(defence.text()) <= 1) {
               gameOver = true; // clears Interval in the start round function.
               endLevel();
             }
@@ -154,7 +154,7 @@ $(document).ready(function() {
     $(".base").hide();
 
     // Whether player has won or lost
-    if (parseInt(score.text()) > 0 && parseInt(defence.text()) > 0) {
+    if (parseInt(score.text()) > 0 && parseInt(defence.text()) > 1) {
       // Whether its the end of the game
       if(currentIndex != (roundArray.length - 1)) {
         endLevelDiv.show();
@@ -267,6 +267,6 @@ $(document).ready(function() {
   })
 
   // Test game
-  startGame();
+   startGame();
 
 });

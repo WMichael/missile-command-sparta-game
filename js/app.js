@@ -129,6 +129,7 @@ $(document).ready(function() {
       // If game is over then no more meteors spawn.
       if (gameOver == true) {
         $(".meteor").remove();
+        console.log("Interval to be removed");
         window.clearInterval(interval);
       }
       else {
@@ -185,14 +186,14 @@ $(document).ready(function() {
     defence.html("100");
 
     // Reset variables
-    // gameOver = true;
+    gameOver = true;
     meteorsPlaced = 0;
     currentMeteors = 0;
   }
 
   function startGame() {
     gameOver = false;
-    startLevel(roundArray[0][currentIndex]);
+    startLevel();
     $(".base").show();
   }
 
@@ -216,7 +217,7 @@ $(document).ready(function() {
   $("#startButton").click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
-    // startGame();
+    startGame();
   });
 
   $("#settingsButton").click(function() {
@@ -226,6 +227,17 @@ $(document).ready(function() {
   })
 
   $("#returnHomeButtonFrmGame").click(function(){
+
+    // Finish current game
+    gameOver = true;
+    currentIndex = 0;
+    meteorsPlaced = 0;
+    currentMeteors = 0;
+    score.html("0");
+    defence.html("100");
+    $("#cLevel").html(currentIndex);
+    $(".base img").css("opacity","1");
+
     homeDiv.css("display","block");
     gameDiv.css("display","none");
   });
@@ -265,8 +277,4 @@ $(document).ready(function() {
     endLevelDiv.hide();
     startGame();
   })
-
-  // Test game
-   startGame();
-
 });

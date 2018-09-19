@@ -22,11 +22,12 @@ $(document).ready(function() {
 
   // Game variables
   const spawnY = 0; // Y position that an object will spawn at.
-  const roundArray = [5,15,25,35]; // Number of meteors per round.
+  const roundArray = [[5,5,10,1500,2000],[10,5,15,1000,1500],[13,10,20,800,1500],[15,10,25,800,1000]];
+  // roundArray - 0: Amt of Meteors 1: Min Speed 2: Max Speed 3: Min Time 4: Max Time
   var currentIndex = 0; // Start of each round current index is incremented.
   var meteorsPlaced = 0; // Reset after each round.
   var currentMeteors = 0;
-  var decreaseDefenceAmt = 100 / (roundArray[currentIndex]/2); // Amt to decrease defence by.
+  var decreaseDefenceAmt = 10; // Amt to decrease defence by.
   var gameOver = false;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
@@ -36,7 +37,7 @@ $(document).ready(function() {
 
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
-      var spawnX = Math.floor(Math.random()*(40))+20; // SpawnX at a random percentage of the width.
+      var spawnX = Math.floor(Math.random()*(30))+30; // SpawnX at a random percentage of the width.
       gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "%;'> </div>");
       meteorElement = $("#" + id);
       currentMeteors++;
@@ -44,7 +45,7 @@ $(document).ready(function() {
 
     // Function for dropping the meteor
     this.fall = function() {
-      var speed = Math.ceil(Math.random()*25)+5;
+      var speed = Math.ceil(Math.random()*roundArray[currentIndex][2])+roundArray[currentIndex][1];
       var currentY = spawnY;
       // Every 100ms the object moves downwards until it reaches the bottom, at the bottom the interval is cleared and a score is taken away.
       var interval = setInterval(function() {
@@ -59,7 +60,7 @@ $(document).ready(function() {
             currentMeteors--;
 
             // Checks whether this meteor is the last one of the round.
-            if (((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) || parseInt(defence.text()) <= 0) {
+            if (((meteorsPlaced == roundArray[currentIndex][0]) && currentMeteors == 0) || parseInt(defence.text()) <= 0) {
               gameOver = true; // clears Interval in the start round function.
               endLevel();
             }
@@ -78,7 +79,7 @@ $(document).ready(function() {
       currentMeteors--;
 
       // Checks whether this meteor is the last one of the round.
-      if ((meteorsPlaced == roundArray[currentIndex]) && currentMeteors == 0) {
+      if ((meteorsPlaced == roundArray[currentIndex][0]) && currentMeteors == 0) {
         gameOver = true; // clears Interval in the start round function.
         endLevel();
       }
@@ -86,7 +87,7 @@ $(document).ready(function() {
 
     // Methods that are called when this object is created.
     meteorsPlaced++;
-    console.log(meteorsPlaced + " / " + roundArray[currentIndex]);
+    console.log(meteorsPlaced + " / " + roundArray[currentIndex][0]);
     this.spawnMeteor();
     meteorElement.click(this.destroy); // Event listener for the object
     this.fall();
@@ -107,8 +108,16 @@ $(document).ready(function() {
   }
 
   // Starts round of meteors taking in the amount of meteors to be spawned.
-  function startLevel(meteorAmt) {
-    var randomTime = Math.ceil(Math.random()*2000)+1000;
+  function startLevel() {
+    console.clear();
+    console.log("Level " + currentIndex);
+    console.log("Amount of meteors: " + roundArray[currentIndex][0]);
+    console.log("Min speed of meteor: " + roundArray[currentIndex][1]);
+    console.log("Max speed of meteor: " + roundArray[currentIndex][2]);
+    console.log("Min time between meteors: " + roundArray[currentIndex][3]);
+    console.log("Max time between meteors: " + roundArray[currentIndex][4]);
+
+    var randomTime = Math.ceil(Math.random()*roundArray[currentIndex][4])+roundArray[currentIndex][3];
     var i = 0;
     var interval = setInterval(function(){
       // If game is over then no more meteors spawn.
@@ -119,13 +128,13 @@ $(document).ready(function() {
       else {
 
         //  Loop through meteors
-        if(i < meteorAmt) {
+        if(i < roundArray[currentIndex][0]) {
           meteor = new Meteor(i);
           i++;
         }
 
         //Set Random interval
-        randomTime = Math.ceil(Math.random()*2000)+1000;
+        randomTime = Math.ceil(Math.random()*roundArray[currentIndex][4])+roundArray[currentIndex][3];
       }
     },randomTime);
   }
@@ -170,7 +179,7 @@ $(document).ready(function() {
 
   function startGame() {
     gameOver = false;
-    startLevel(roundArray[currentIndex]);
+    startLevel(roundArray[0][currentIndex]);
     $(".base").show();
   }
 

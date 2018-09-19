@@ -17,7 +17,7 @@
         <div id="startButton" class="button">
           <p>Start</p>
         </div>
-        <div id="startButton" class="button">
+        <div id="leaderboardButton" class="button">
           <p>Leaderboard</p>
         </div>
         <div id="settingsButton" class="button">
@@ -46,6 +46,10 @@
             <div id="nextLevelBtn" class="action">Next Level</div>
             <div id="playAgainBtn" class="action">Play Again</div>
           </div>
+          <div id="endGame">
+            <h1>Game finished!</h1>
+            <h2 id="finalScore"></h2>
+          </div>
           <div class="base">
             <img src="images/sprites/base1.png" alt="">
             <img src="images/sprites/base2.png" alt="">
@@ -69,9 +73,36 @@
       </section>
     </div>
 
+    <div id="leaderboardDiv">
+      <header>
+        <h1>Leaderboard</h1>
+      </header>
+      <section>
+        <table>
+          <tr>
+            <td>Player1</td>
+            <td>3123</td>
+          </tr>
+          <tr>
+            <td>Player2</td>
+            <td>1233</td>
+          </tr>
+          <tr>
+            <td>Player3</td>
+            <td>2897</td>
+          </tr>
+        </table>
+        <div class="returnHomeButton button">
+          <p>Home</p>
+        </div>
+      </section>
+    </div>
+
     <div id="settingsDiv">
       <header>
         <h1>Settings</h1>
+      </header>
+      <section>
         <table>
           <tr>
             <td><h3>Sound Effects</h3></td>
@@ -82,9 +113,7 @@
             <td><input type="checkbox" id="checkBackgroundMusic" checked></td>
           </tr>
         </table>
-      </header>
-      <section>
-        <div id="returnHomeButtonFrmSettings" class="button">
+        <div class="returnHomeButton button">
           <p>Home</p>
         </div>
       </section>

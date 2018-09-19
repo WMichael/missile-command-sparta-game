@@ -3,6 +3,7 @@ $(document).ready(function() {
   const homeDiv = $("#homeDiv");
   const gameDiv = $("#gameDiv");
   const settingsDiv = $("#settingsDiv");
+  const leaderboardDiv = $("#leaderboardDiv");
 
   // Sounds
   var soundEffects = true;
@@ -14,6 +15,7 @@ $(document).ready(function() {
   const gameFrame = $(".gameFrame");
   const endLevelDiv = $("#endLevel");
   const endLevelText = $("#endLevelText");
+  const endGameDiv = $("#endGame");
   const nextLevelBtn = $("#nextLevelBtn");
   const playAgainBtn = $("#playAgainBtn");
   const score = $("#score");
@@ -31,6 +33,10 @@ $(document).ready(function() {
   var currentMeteors = 0;
   var decreaseDefenceAmt = 10; // Amt to decrease defence by.
   var gameOver = false;
+
+  // Leaderboard and current player score.
+  var leaderboard = []
+  var playerScore = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
   function Meteor(id) {
@@ -115,7 +121,8 @@ $(document).ready(function() {
 
   // Starts round of meteors taking in the amount of meteors to be spawned.
   function startLevel() {
-    console.clear();
+    //console.clear();
+    console.log(playerScore);
     console.log("Level " + currentIndex);
     console.log("Amount of meteors: " + roundArray[currentIndex][0]);
     console.log("Min speed of meteor: " + roundArray[currentIndex][1]);
@@ -159,18 +166,19 @@ $(document).ready(function() {
       // Whether its the end of the game
       if(currentIndex != (roundArray.length - 1)) {
         endLevelDiv.show();
-        endLevelText.html("<h1>Level " + currentIndex + " Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
+        endLevelText.html("<h1>Level " + currentIndex + " Success!</h1><br><h2>Points + Defence Bonus: " + (parseInt(score.text()) + parseInt(defence.text())) + "</h2>");
         nextLevelBtn.show();
-        playAgainBtn.show();
         if (soundEffects) {
           winSound.play();
         }
       }
       else {
-        endLevelDiv.show();
-        endLevelText.html("<h1>Game Finished!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
-        playAgainBtn.show();
-        nextLevelBtn.hide();
+        playerScore = playerScore + (parseInt(score.html()) + parseInt(defence.html()));
+        endGameDiv.show();
+        var playerName = prompt("Game Over - What's your name?");
+        $("#finalScore").html(playerName + " " + playerScore);
+        leaderboard.push([playerName,playerScore]); // Push name and score to leaderboard.
+        console.log(leaderboard);
       }
     }
     else {
@@ -182,8 +190,6 @@ $(document).ready(function() {
         loseSound.play();
       }
     }
-    score.html("0");
-    defence.html("100");
 
     // Reset variables
     gameOver = true;
@@ -221,6 +227,11 @@ $(document).ready(function() {
     startGame();
   });
 
+  $("#leaderboardButton").click(function() {
+    homeDiv.css("display","none");
+    leaderboardDiv.css("display","block");
+  })
+
   $("#settingsButton").click(function() {
     settingsDiv.css("display","block");
     homeDiv.css("display","none");
@@ -243,9 +254,10 @@ $(document).ready(function() {
     gameDiv.css("display","none");
   });
 
-  $("#returnHomeButtonFrmSettings").click(function(){
+  $(".returnHomeButton").click(function(){
     homeDiv.css("display","block");
     settingsDiv.css("display","none");
+    leaderboardDiv.css("display","none");
   });
 
   $("#checkSoundEffects").click(function() {
@@ -268,6 +280,10 @@ $(document).ready(function() {
 
   // End level event listeners
   nextLevelBtn.click(function(){
+    playerScore = playerScore + (parseInt(score.html()) + parseInt(defence.html()));
+    console.log(playerScore);
+    score.html("0");
+    defence.html("100");
     currentIndex++;
     $("#cLevel").html(currentIndex);
     endLevelDiv.hide();
@@ -275,6 +291,8 @@ $(document).ready(function() {
   });
 
   playAgainBtn.click(function(){
+    score.html("0");
+    defence.html("100");
     endLevelDiv.hide();
     startGame();
   })

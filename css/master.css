@@ -20,7 +20,22 @@ h2 {
 }
 
 header {
+  margin-top: 50px;
   text-align: center;
+}
+
+section {
+  text-align: center;
+}
+
+table {
+  margin: auto;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+td {
+  padding-left: 15px;
 }
 
 /* Views */
@@ -62,18 +77,13 @@ header {
   display: none;
 }
 
-#settingsDiv section {
-  text-align: center;
+/* Leaderboard Div styling*/
+#leaderboardDiv {
+  display: none;
 }
 
-#settingsDiv table {
-  margin: auto;
-  margin-bottom: 30px;
-  text-align: left;
-}
-
-#settingsDiv td {
-  padding-left: 15px;
+#leaderboardDiv td {
+  font-size: 28px;
 }
 
 /* Game Div styling */
@@ -121,7 +131,16 @@ header {
   margin: auto;
 }
 
-#endLevel {
+#endLevel{
+  position: relative;
+  top: 120px;
+  text-align: center;
+  color: green;
+  display: none;
+  padding: 0;
+}
+
+#endGame{
   position: relative;
   top: 120px;
   text-align: center;

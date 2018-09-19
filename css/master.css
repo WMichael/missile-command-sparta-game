@@ -44,7 +44,7 @@ td {
 #homeDiv {
   text-align: center;
   vertical-align: middle;
-  margin-top: 20%;
+  /* margin-top: 20%; */
   display: block; // set to none whilst in development.
 }
 

@@ -5,6 +5,8 @@ $(document).ready(function() {
   const settingsDiv = $("#settingsDiv");
 
   // Sounds
+  var soundEffects = true;
+  var backgroundMusic = true;
   const winSound = new sound("sounds/win.wav");
   const loseSound = new sound("sounds/lose.mp3");
 
@@ -73,8 +75,10 @@ $(document).ready(function() {
     this.destroy = function() {
       meteorElement.css("visibility","hidden");
       setScore(50);
-      var meteorExplosion = new sound("sounds/explosion.mp3");
-      meteorExplosion.play();
+      if (soundEffects) {
+        var meteorExplosion = new sound("sounds/explosion.mp3");
+        meteorExplosion.play();
+      }
       destroyed = true;
       currentMeteors--;
 
@@ -157,7 +161,9 @@ $(document).ready(function() {
         endLevelText.html("<h1>Level " + currentIndex + " Success!</h1><br><h2>Points: " + score.text() + " Defence: " + defence.text() + "%</h2>");
         nextLevelBtn.show();
         playAgainBtn.show();
-        winSound.play();
+        if (soundEffects) {
+          winSound.play();
+        }
       }
       else {
         endLevelDiv.show();
@@ -171,7 +177,9 @@ $(document).ready(function() {
       endLevelText.html("<h1>You lost!</h1>");
       nextLevelBtn.hide();
       playAgainBtn.show();
-      loseSound.play();
+      if (soundEffects) {
+        loseSound.play();
+      }
     }
     score.html("0");
     defence.html("100");
@@ -226,6 +234,24 @@ $(document).ready(function() {
     homeDiv.css("display","block");
     settingsDiv.css("display","none");
   });
+
+  $("#checkSoundEffects").click(function() {
+    if ($("#checkSoundEffects:checked").length > 0) {
+      soundEffects = true;
+    }
+    else {
+      soundEffects = false;
+    }
+  })
+
+  $("#checkBackgroundMusic").click(function() {
+    if ($("#checkBackgroundMusic:checked").length > 0) {
+      backgroundMusic = true;
+    }
+    else {
+      backgroundMusic = false;
+    }
+  })
 
   // End level event listeners
   nextLevelBtn.click(function(){

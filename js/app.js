@@ -26,7 +26,7 @@ $(document).ready(function() {
 
   // Game variables
   const spawnY = 0; // Y position that an object will spawn at.
-  const roundArray = [[5,5,10,1500,2000],[10,5,15,1000,1500],[13,10,15,800,1500],[15,10,20,800,1000]];
+  const roundArray = [[5,5,10,1500,2000],[10,5,15,1500,1500],[13,10,15,1500,1500],[15,10,20,1500,1500]];
   // roundArray - 0: Amt of Meteors 1: Min Speed 2: Max Speed 3: Min Time 4: Max Time
   var currentIndex = 0; // Start of each round current index is incremented.
   var meteorsPlaced = 0; // Reset after each round.

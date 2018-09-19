@@ -217,6 +217,7 @@ $(document).ready(function() {
   $("#startButton").click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
+    endLevelDiv.css("display","none");
     startGame();
   });
 

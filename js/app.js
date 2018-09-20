@@ -36,7 +36,7 @@ $(document).ready(function() {
   var gameOver = false;
 
   // Leaderboard and current player score.
-  var leaderboard = [];
+  var leaderboard = [["User 1",1200],["User 2",922],["User 3",3210]];
   var playerScore = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
@@ -209,7 +209,7 @@ $(document).ready(function() {
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
-    this.sound.volume = 0.1;
+    this.sound.volume = 0.5;
     document.body.appendChild(this.sound);
     this.play = function(){
         this.sound.play();
@@ -229,6 +229,11 @@ $(document).ready(function() {
   });
 
   $("#leaderboardButton").click(function() {
+    // Sort leaderboard array in ascending order.
+    leaderboard.sort(function(a,b){
+      return b[1] - a[1];
+    });
+
     // Clears table and then adds each score to the table.
     $("#leaderboardTable").html("");
     for (var i = 0; i < leaderboard.length; i++) {

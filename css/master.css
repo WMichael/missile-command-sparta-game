@@ -124,7 +124,6 @@ td {
   background-image: url("../images/gameBackground.png");
   background-size: cover;
   padding: 0;
-  /* overflow: auto; */
 }
 
 .base {

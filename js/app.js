@@ -179,6 +179,7 @@ $(document).ready(function() {
         var playerName = prompt("Game Over - What's your name?");
         $("#finalScore").html(playerName + " " + playerScore);
         leaderboard.push([playerName,playerScore]); // Push name and score to leaderboard.
+        localStorage.setItem("leaderboard",JSON.stringify(leaderboard)); // Put leaderboard into localStorage.
       }
     }
     else {
@@ -217,7 +218,7 @@ $(document).ready(function() {
     this.stop = function(){
         this.sound.pause();
     }
-}
+  }
 
   $("#startButton").click(function(){
     homeDiv.css("display","none");
@@ -229,6 +230,11 @@ $(document).ready(function() {
   });
 
   $("#leaderboardButton").click(function() {
+    // get leaderboard array from localStorage.
+    if (JSON.parse(localStorage.getItem("leaderboard") != null)) {
+      leaderboard = JSON.parse(localStorage.getItem("leaderboard"));
+    }
+
     // Sort leaderboard array in ascending order.
     leaderboard.sort(function(a,b){
       return b[1] - a[1];
@@ -309,7 +315,4 @@ $(document).ready(function() {
     endLevelDiv.hide();
     startGame();
   })
-
-
-
 });

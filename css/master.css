@@ -8,11 +8,18 @@ body {
   overflow: hidden;
 }
 
+/* Custom fonts*/
+@font-face {
+    font-family: KenneySpace;
+    src: url(../fonts/KenneySpace.ttf);
+}
+
 /* Header styling */
 h1 {
-  font-size: 65px;
+  font-size: 50px;
   margin-top: 15px;
   margin-bottom: 15px;
+  font-family: KenneySpace, monospace;
 }
 
 h2 {
@@ -22,6 +29,7 @@ h2 {
 header {
   margin-top: 50px;
   text-align: center;
+  text-shadow: 5px 5px 7px grey;
 }
 
 section {
@@ -44,7 +52,7 @@ td {
 #homeDiv {
   text-align: center;
   vertical-align: middle;
-  margin-top: 20%;
+  /* margin-top: 20%; */
   display: block; // set to none whilst in development.
 }
 
@@ -61,6 +69,7 @@ td {
   display: inline-block;
   margin-right: 15px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .button:hover {
@@ -110,12 +119,11 @@ td {
   border: 1px black solid;
   margin: auto;
   width: 100%;
-  height: 500px;
+  height: 450px;
   cursor: crosshair;
   background-image: url("../images/gameBackground.png");
   background-size: cover;
   padding: 0;
-  /* overflow: auto; */
 }
 
 .base {
@@ -124,7 +132,7 @@ td {
   margin: auto;
   position: relative;
   overflow-y: hidden;
-  top: 421px;
+  top: 371px;
 }
 
 .base img {
@@ -163,7 +171,7 @@ td {
 .meteor {
   width: 42px;
   height: 42px;
-  position: relative;
+  position: absolute;
   display: inline-block;
   background-image: url(../images/sprites/meteor.png);
   margin: 0;

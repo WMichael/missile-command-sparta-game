@@ -25,7 +25,6 @@ $(document).ready(function() {
   const frameHeight = 450;
 
   // Game variables
-  // const spawnY = 0; // Y position that an object will spawn at.
   var spawnY = gameFrame.offset().top; // finds the top of the gameframe
   const roundArray = [[5,5,10,1500,2000],[10,5,13,1000,1500],[15,10,15,1000,1200]];
   // roundArray - 0: Amt of Meteors 1: Min Speed 2: Max Speed 3: Min Time 4: Max Time
@@ -142,6 +141,13 @@ $(document).ready(function() {
         $(".meteor").remove();
         window.clearInterval(interval);
       }
+      else if (meteorsPlaced > roundArray[currentIndex][0]) { // Bug fix!, if more meteors have been spawned than the amount for the level, then remove all and end level.
+        $(".meteor").remove();
+        window.clearInterval(interval);
+        endLevel();
+        console.log("More meteors placed than amount needed");
+        console.log("Trying to end level");
+      }
       else {
 
         //  Loop through meteors
@@ -178,7 +184,7 @@ $(document).ready(function() {
       else {
         playerScore = playerScore + (parseInt(score.html()) + parseInt(defence.html()));
         endGameDiv.show();
-        var playerName = prompt("Game Over - What's your name?");
+        var playerName = prompt("You Won! - What's your name?");
         $("#finalScore").html(playerName + " " + playerScore);
         leaderboard.push([playerName,playerScore]); // Push name and score to leaderboard.
         localStorage.setItem("leaderboard",JSON.stringify(leaderboard)); // Put leaderboard into localStorage.

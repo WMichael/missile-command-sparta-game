@@ -91,8 +91,9 @@ td {
   display: none;
 }
 
-#leaderboardDiv td {
+#leaderboardDiv td, #leaderboardDiv th{
   font-size: 28px;
+  text-align: center;
 }
 
 /* Game Div styling */

@@ -27,7 +27,7 @@ $(document).ready(function() {
   // Game variables
   // const spawnY = 0; // Y position that an object will spawn at.
   var spawnY = gameFrame.offset().top; // finds the top of the gameframe
-  const roundArray = [[5,5,10,1500,2000],[10,5,15,1500,1500],[13,10,15,1500,1500],[15,10,20,1500,1500]];
+  const roundArray = [[5,5,10,1500,2000],[10,5,13,1000,1500],[15,10,15,1000,1200]];
   // roundArray - 0: Amt of Meteors 1: Min Speed 2: Max Speed 3: Min Time 4: Max Time
   var currentIndex = 0; // Start of each round current index is incremented.
   var meteorsPlaced = 0; // Reset after each round.
@@ -36,7 +36,7 @@ $(document).ready(function() {
   var gameOver = false;
 
   // Leaderboard and current player score.
-  var leaderboard = [["User 1",1200],["User 2",922],["User 3",3210]];
+  var leaderboard = [];
   var playerScore = 0;
 
   // Meteor object constructor used to handle falling meteors and their behaviours.
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
     // Function that spawns the meteor at a random X coordinate at a fixed Y coordinate.
     this.spawnMeteor = function() {
-      var spawnX = Math.floor(Math.random()*(30))+30; // SpawnX at a random percentage of the width.
+      var spawnX = Math.ceil((Math.random()*30)+30); // SpawnX at a random percentage of the width.
       console.log(spawnX + "%");
       gameFrame.append("<div id='" + id + "' class='meteor' style='top:" + spawnY + "px;left:" + spawnX + "%;'> </div>");
       meteorElement = $("#" + id);
@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     // Function for dropping the meteor
     this.fall = function() {
-      var speed = Math.ceil(Math.random()*roundArray[currentIndex][2])+roundArray[currentIndex][1];
+      var speed = Math.ceil((Math.random()*roundArray[currentIndex][2])+roundArray[currentIndex][1]);
       var currentY = spawnY;
       // Every 100ms the object moves downwards until it reaches the bottom, at the bottom the interval is cleared and a score is taken away.
       var interval = setInterval(function() {
@@ -63,7 +63,8 @@ $(document).ready(function() {
           currentY += speed;
         if (currentY >= (spawnY + frameHeight - 75)) {
           window.clearInterval(interval);
-          meteorElement.css("visibility","hidden");
+          // meteorElement.css("visibility","hidden");
+          meteorElement.remove();
           if(!destroyed && gameOver != true) {
             setScore(-50); // Deducts 50 points from the current score.
             decreaseDefence(); // Decreases Defence
@@ -81,7 +82,8 @@ $(document).ready(function() {
 
     // Removes element on click
     this.destroy = function() {
-      meteorElement.css("visibility","hidden");
+      meteorElement.remove();
+      // meteorElement.css("visibility","hidden");
       setScore(50);
       if (soundEffects) {
         var meteorExplosion = new sound("sounds/explosion.mp3");
@@ -125,14 +127,14 @@ $(document).ready(function() {
   function startLevel() {
     console.clear();
     console.log("Total Score: " + playerScore);
-    console.log("Level " + currentIndex);
+    console.log("Level " + (currentIndex + 1));
     console.log("Amount of meteors: " + roundArray[currentIndex][0]);
     console.log("Min speed of meteor: " + roundArray[currentIndex][1]);
     console.log("Max speed of meteor: " + roundArray[currentIndex][2]);
     console.log("Min time between meteors: " + roundArray[currentIndex][3]);
     console.log("Max time between meteors: " + roundArray[currentIndex][4]);
 
-    var randomTime = Math.ceil(Math.random()*roundArray[currentIndex][4])+roundArray[currentIndex][3];
+    var randomTime = Math.ceil((Math.random()*roundArray[currentIndex][4])+roundArray[currentIndex][3]);
     var i = 0;
     var interval = setInterval(function(){
       // If game is over then no more meteors spawn.
@@ -167,7 +169,7 @@ $(document).ready(function() {
       // Whether its the end of the game
       if(currentIndex != (roundArray.length - 1)) {
         endLevelDiv.show();
-        endLevelText.html("<h1>Level " + currentIndex + " Success!</h1><br><h2>Points + Defence Bonus: " + (parseInt(score.text()) + parseInt(defence.text())) + "</h2>");
+        endLevelText.html("<h1>Level " + (currentIndex + 1) + " Success!</h1><br><h2>Points + Defence Bonus: " + (parseInt(score.text()) + parseInt(defence.text())) + "</h2>");
         nextLevelBtn.show();
         if (soundEffects) {
           winSound.play();
@@ -230,10 +232,6 @@ $(document).ready(function() {
   });
 
   $("#leaderboardButton").click(function() {
-    // get leaderboard array from localStorage.
-    if (JSON.parse(localStorage.getItem("leaderboard") != null)) {
-      leaderboard = JSON.parse(localStorage.getItem("leaderboard"));
-    }
 
     // Sort leaderboard array in ascending order.
     leaderboard.sort(function(a,b){
@@ -265,7 +263,7 @@ $(document).ready(function() {
     currentMeteors = 0;
     score.html("0");
     defence.html("100");
-    $("#cLevel").html(currentIndex);
+    $("#cLevel").html(currentIndex + 1);
     $(".base img").css("opacity","1");
 
     homeDiv.css("display","block");
@@ -304,7 +302,7 @@ $(document).ready(function() {
     score.html("0");
     defence.html("100");
     currentIndex++;
-    $("#cLevel").html(currentIndex);
+    $("#cLevel").html(currentIndex + 1);
     endLevelDiv.hide();
     startGame();
   });
@@ -315,4 +313,9 @@ $(document).ready(function() {
     endLevelDiv.hide();
     startGame();
   })
+
+  // Get leaderboard array from localStorage.
+  if (JSON.parse(localStorage.getItem("leaderboard") != null)) {
+    leaderboard = JSON.parse(localStorage.getItem("leaderboard"));
+  }
 });

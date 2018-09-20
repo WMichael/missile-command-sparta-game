@@ -240,6 +240,7 @@ $(document).ready(function() {
 
     // Clears table and then adds each score to the table.
     $("#leaderboardTable").html("");
+    $("#leaderboardTable").append("<tr><th>Player</th><th>Score</th>");
     for (var i = 0; i < leaderboard.length; i++) {
       $("#leaderboardTable").append("<tr><td>" + leaderboard[i][0] + "</td><td>" + leaderboard[i][1] + "</td></tr>");
     }

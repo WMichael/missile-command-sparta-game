@@ -91,8 +91,9 @@ td {
   display: none;
 }
 
-#leaderboardDiv td {
+#leaderboardDiv td, #leaderboardDiv th{
   font-size: 28px;
+  text-align: center;
 }
 
 /* Game Div styling */
@@ -167,7 +168,7 @@ td {
   font-size: 45px;
 }
 
-/* Extra styling for sprites*/
+/* Extra styling*/
 .meteor {
   width: 42px;
   height: 42px;
@@ -176,4 +177,10 @@ td {
   background-image: url(../images/sprites/meteor.png);
   margin: 0;
   padding: 0;
+}
+
+.blackBorder {
+  border-radius: 5px;
+  border: 3px solid black;
+  padding: 15px;
 }

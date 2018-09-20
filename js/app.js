@@ -22,7 +22,7 @@ $(document).ready(function() {
   const defence = $("#defenceLevel");
 
   // Game frame
-  const frameHeight = 500;
+  const frameHeight = 450;
 
   // Game variables
   // const spawnY = 0; // Y position that an object will spawn at.
@@ -61,7 +61,7 @@ $(document).ready(function() {
       var interval = setInterval(function() {
           meteorElement.css("top",currentY + "px");
           currentY += speed;
-        if (currentY >= (spawnY + frameHeight - 75)) {
+        if (currentY >= (spawnY + frameHeight - 55)) {
           window.clearInterval(interval);
           // meteorElement.css("visibility","hidden");
           meteorElement.remove();

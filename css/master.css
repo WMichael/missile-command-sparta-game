@@ -119,7 +119,7 @@ td {
   border: 1px black solid;
   margin: auto;
   width: 100%;
-  height: 500px;
+  height: 450px;
   cursor: crosshair;
   background-image: url("../images/gameBackground.png");
   background-size: cover;
@@ -132,7 +132,7 @@ td {
   margin: auto;
   position: relative;
   overflow-y: hidden;
-  top: 421px;
+  top: 371px;
 }
 
 .base img {

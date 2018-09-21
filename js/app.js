@@ -141,12 +141,11 @@ $(document).ready(function() {
         $(".meteor").remove();
         window.clearInterval(interval);
       }
-      else if (meteorsPlaced > roundArray[currentIndex][0]) { // Bug fix!, if more meteors have been spawned than the amount for the level, then remove all and end level.
+      else if (meteorsPlaced > roundArray[currentIndex][0] - 1) { // Bug fix!, if more meteors have been spawned than the amount for the level, then remove all and end level.
         $(".meteor").remove();
         window.clearInterval(interval);
         endLevel();
-        console.log("More meteors placed than amount needed");
-        console.log("Trying to end level");
+        console.log("Bug fix - Attempting to end level");
       }
       else {
 

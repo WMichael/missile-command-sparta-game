@@ -41,6 +41,17 @@ The settings of the game allows you to control whether you want to have sound ef
 
 ![Settings Screenshot](images/screenshots/settings.jpg)
 
+### Sounds
+I used sound effects in my game these include:
+- Explosion sound [https://freesound.org/people/Omar%20Alvarado/sounds/199725/](https://freesound.org/people/Omar%20Alvarado/sounds/199725/)
+- Win sound [https://freesound.org/people/unadamlar/sounds/341984/](https://freesound.org/people/unadamlar/sounds/341984/)
+- Lose sound [https://freesound.org/people/josepharaoh99/sounds/364929/](https://freesound.org/people/josepharaoh99/sounds/364929/)
+
+### Other JS Scripts
+- JQuery
+
+### Fonts
+- Kenney Space font used for the header [https://www.1001fonts.com/kenney-space-font.html](https://www.1001fonts.com/kenney-space-font.html)
 
 ## Future Additions
 - Add other falling objects e.g Aliens, Defence Boosts

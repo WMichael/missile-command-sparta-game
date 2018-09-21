@@ -10,7 +10,6 @@ If you want to download this game please click on the "Clone or Download" button
 It will allow you to clone this repository.
 
 
-
 ## Missile Command game for my Sparta Game Project
 This is a HTML5 / JS / CSS game. The idea of this game came from the old Atari game of the same name.
 
@@ -47,8 +46,8 @@ The settings of the game allows you to control whether you want to have sound ef
 - Add other falling objects e.g Aliens, Defence Boosts
 - Animations to show missiles hitting the target
 - Missile explosions that hit other nearby meteors.
+- More levels to play on.
 
 
 ## Current issues
 - Sometimes meteors will spawn at the top of the game but will be stuck. This will cause the user to lose points/defence and possibly lose the level.
-- Sometimes on a level, all the meteors will have been spawned but the level won't finish. When looking at the console, it shows that more meteors have spawned than the amount that's mean't to be spawned during the level.

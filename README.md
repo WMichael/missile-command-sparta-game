@@ -17,6 +17,8 @@ This is a HTML5 / JS / CSS game. The idea of this game came from the old Atari g
 
 The purpose of the game is to be quick enough to destroy the increasingly fast incoming meteors that are heading for the home base.
 
+Here is the [Rough plan](docs/roughPlan.pdf) for the game.
+
 ## How to Play
 To destroy the meteors you have to left-click on them. Destroying a meteor will earn you 50 points but missing a meteor will lose you 50 points and 10% from your defence.
 

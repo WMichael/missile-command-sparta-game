@@ -211,6 +211,7 @@ $(document).ready(function() {
     $(".base").show();
   }
 
+  // Object constructor used for playing sounds.
   function sound(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
@@ -227,6 +228,7 @@ $(document).ready(function() {
     }
   }
 
+  // Event listeners
   $("#startButton").click(function(){
     homeDiv.css("display","none");
     gameDiv.css("display","block");
